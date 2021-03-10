@@ -1,16 +1,11 @@
-FROM debian:jessie
+FROM amazonlinux:2
 
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -yq \
-    lsb-release \
-    curl
+ENV SSM_AGENT_URL https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 
-ENV AGENT_URL https://amazon-ssm-us-east-1.s3.amazonaws.com/latest/debian_amd64/amazon-ssm-agent.deb
+RUN yum install -y shadow-utils ${SSM_AGENT_URL}
 
-RUN curl ${AGENT_URL} -o amazon-ssm-agent.deb && \
-    dpkg -i amazon-ssm-agent.deb && \
-    rm -f amazon-ssm-agent.deb
+RUN useradd -ms /bin/bash ssm-user
 
-WORKDIR /etc/amazon/ssm/
+RUN yum remove -y shadow-utils
+
 CMD ["amazon-ssm-agent", "start"]
