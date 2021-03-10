@@ -1,4 +1,3 @@
-# aws-ssmagent-debian
+# amazon-ssm-agent docker image
 
-Image used to run Aws SSM-agent based on Debian
-
+Simple Dockerfile to run [amazon-ssm-agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html) on Docker.
