@@ -9,8 +9,6 @@ tag:
 	docker tag ${IMAGE} ${IMAGE}:latest
 
 build-version: build tag
-	docker tag ${IMAGE} ${IMAGE}:${VERSION}
-	docker tag ${IMAGE} ${IMAGE}:latest
 
 push: build-version
 	docker push ${IMAGE}:${VERSION}
